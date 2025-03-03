@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.atividade6"
+    namespace = "com.example.atividade7"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.atividade6"
+        applicationId = "com.example.atividade7"
         minSdk = 29
         targetSdk = 35
         versionCode = 1
