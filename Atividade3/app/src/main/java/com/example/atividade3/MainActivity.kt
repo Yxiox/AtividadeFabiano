@@ -95,33 +95,6 @@ fun Screen(modifier: Modifier) {
             }
         }
 
-        /*Column (modifier = Modifier.weight(1f)) {
-            Row (modifier = Modifier.fillMaxSize().weight(1f).background(Color(60,140,160)), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                Column (modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(imageVector = Icons.Default.Favorite, contentDescription = "Favorite", modifier = Modifier.size(120.dp))
-                    Text(modifier= Modifier, text = "Qualquer", color = Color.White, fontSize = 40.sp)
-                }
-            }
-            Row (modifier = Modifier.fillMaxSize().weight(1f)) {
-                Box(modifier=Modifier.fillMaxSize().weight(1f).background(Color(25,115,125))){}
-            }
-            Row (modifier = Modifier.fillMaxSize().weight(1f)) {
-                Box(modifier=Modifier.fillMaxSize().weight(1f).background(Color(15,105,115))){}
-            }
-
-        }
-        Column (modifier = Modifier.weight(1f)) {
-            Row (modifier = Modifier.fillMaxSize().weight(1f)) {
-                Box(modifier=Modifier.fillMaxSize().weight(1f).background(Color(50,130,150))){}
-            }
-            Row (modifier = Modifier.fillMaxSize().weight(1f)) {
-                Box(modifier=Modifier.fillMaxSize().weight(1f).background(Color(20,110,120))){}
-            }
-            Row (modifier = Modifier.fillMaxSize().weight(1f)) {
-                Box(modifier=Modifier.fillMaxSize().weight(1f).background(Color(10,100,110))){}
-            }
-
-        }*/
     }
     }
     }
