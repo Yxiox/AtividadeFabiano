@@ -45,6 +45,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myregistry.ui.theme.MyRegistryTheme
 import com.example.myregistry.R
+import com.example.myregistry.components.MyPasswordField
+import com.example.myregistry.components.MyTextField
 
 @Composable
 fun RegisterUserMainScreen(){
@@ -77,11 +79,11 @@ fun RegisterUserFields(){
     val ctx = LocalContext.current
 
     Column (verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(65.dp)) {
-        OutlinedTextField(value = registerUser.value.email, onValueChange = {registerUserViewModel.onEmailChange(it)}, Modifier.padding(vertical = 5.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Color.White, focusedLabelColor = Color.White, cursorColor = Color.White, unfocusedBorderColor = Color.Gray, unfocusedLabelColor = Color.Gray), label = { Text(text = "E-mail")})
-        OutlinedTextField(value = registerUser.value.login, onValueChange = {registerUserViewModel.onLoginChange(it)}, Modifier.padding(vertical = 5.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Color.White, focusedLabelColor = Color.White, cursorColor = Color.White, unfocusedBorderColor = Color.Gray, unfocusedLabelColor = Color.Gray), label = { Text(text = "Login")})
-        OutlinedTextField(value = registerUser.value.senha, onValueChange = {registerUserViewModel.onSenhaChange(it)}, Modifier.padding(vertical = 5.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Color.White, focusedLabelColor = Color.White, cursorColor = Color.White, unfocusedBorderColor = Color.Gray, unfocusedLabelColor = Color.Gray), label = { Text(text = "Senha")}, visualTransformation = PasswordVisualTransformation())
-        OutlinedTextField(value = registerUser.value.confirmarsenha, onValueChange = {registerUserViewModel.onConfirmarSenhaChange(it)}, Modifier.padding(vertical = 5.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Color.White, focusedLabelColor = Color.White, cursorColor = Color.White, unfocusedBorderColor = Color.Gray, unfocusedLabelColor = Color.Gray), label = { Text(text = "Confirmar Senha")}, visualTransformation = PasswordVisualTransformation())
-        OutlinedButton(onClick = {
+        MyTextField(value=registerUser.value.email, onValueChange = {registerUserViewModel.onEmailChange(it)}, "E-mail")
+        MyTextField(value=registerUser.value.login, onValueChange = {registerUserViewModel.onLoginChange(it)}, "Login")
+        MyPasswordField(value=registerUser.value.senha, onValueChange = {registerUserViewModel.onSenhaChange(it)}, "Senha")
+        MyPasswordField(value=registerUser.value.confirmarsenha, confirmValue = registerUser.value.senha, onValueChange = {registerUserViewModel.onConfirmarSenhaChange(it)}, "Confirmar Senha")
+       OutlinedButton(onClick = {
             if (!registerUser.value.senha.equals(registerUser.value.confirmarsenha)){
                 Toast.makeText(ctx,"As senhas não conferem", Toast.LENGTH_LONG).show()
             }
