@@ -66,7 +66,7 @@ fun MyPasswordField(value:String, onValueChange: (String) -> Unit, label:String)
                 unfocusedLabelColor = Color.Gray),
             label = { Text(text = label) },
             supportingText = {if (isTouched.value && value.isBlank()){
-                Text(text = "As senhas não conferem")
+                Text(text = "Field $label is required")
             } },
             trailingIcon = {
                 val image = if (shown.value)

@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -45,6 +46,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myregistry.ui.theme.MyRegistryTheme
 import com.example.myregistry.R
+import com.example.myregistry.components.ErrorDialog
 import com.example.myregistry.components.MyPasswordField
 import com.example.myregistry.components.MyTextField
 
@@ -54,7 +56,7 @@ fun RegisterUserMainScreen(){
         Column (modifier = Modifier
             .fillMaxSize()
             .padding(it), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            LogoLoad()
+            //LogoLoad()
             RegisterUserFields()
 
         }
@@ -72,6 +74,8 @@ fun LogoLoad(){
     }
 }
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterUserFields(){
     val registerUserViewModel : RegisterUserViewModel = viewModel()
@@ -84,16 +88,22 @@ fun RegisterUserFields(){
         MyPasswordField(value=registerUser.value.senha, onValueChange = {registerUserViewModel.onSenhaChange(it)}, "Senha")
         MyPasswordField(value=registerUser.value.confirmarsenha, confirmValue = registerUser.value.senha, onValueChange = {registerUserViewModel.onConfirmarSenhaChange(it)}, "Confirmar Senha")
        OutlinedButton(onClick = {
-            if (!registerUser.value.senha.equals(registerUser.value.confirmarsenha)){
-                Toast.makeText(ctx,"As senhas não conferem", Toast.LENGTH_LONG).show()
-            }
-
-
+           if (registerUserViewModel.register()){
+               Toast.makeText(ctx, "User registered", Toast.LENGTH_SHORT).show()
+           }
         },
             Modifier
                 .fillMaxWidth()
                 .padding(vertical = 5.dp)
                 .height(60.dp), shape = RoundedCornerShape(5.dp), colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.White, contentColor = Color.DarkGray)) { Text(text = "Registrar") }
+
+        if (registerUser.value.errorMessage.isNotBlank()){
+            ErrorDialog(
+                error = registerUser.value.errorMessage,
+                onDismissRequest = {
+                    registerUserViewModel.cleanErrorMessage()
+                })
+        }
 
     }
 
