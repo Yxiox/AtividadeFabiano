@@ -37,7 +37,7 @@ fun TipCalculator()
                     onValueChange = { newValue:String ->
                         val cleanedValue = newValue.filter { it.isDigit() }
                         val parsedValue = cleanedValue.toFloat().div(100)
-                        billViewModel.onValueChange(parsedValue)
+                        billViewModel.onValueChange(parsedValue, bill.value.tipPercentage)
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true
@@ -52,12 +52,12 @@ fun TipCalculator()
                     value = bill.value.tipPercentage,
                     onValueChange = { newValue ->
                         val roundedValue = newValue.roundToInt()
-                        billViewModel.onTipPercentageChange(tipPercentage = roundedValue.toFloat())
+                        billViewModel.onTipPercentageChange(tipPercentage = roundedValue.toFloat(), bill.value.billValue)
                     },
                     valueRange = 0f..30f,
                     steps = 60,
                     modifier = Modifier.onFocusChanged {
-                        billViewModel.onTipPercentageChange(bill.value.tipPercentage)
+                        billViewModel.onTipPercentageChange(bill.value.tipPercentage, bill.value.billValue)
                     }
                 )
             }
